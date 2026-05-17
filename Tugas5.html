@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillio - Unlock Your IT Potential</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<style>
+    /* Pengaturan Umum */
+body {
+    background-color: #4f3bd1; /* Warna gelap background */
+    color: #eee7eb;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+    padding: 20px 0;
+}
+
+.nav-link {
+    color: #a0a0a0 !important;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #7b42f5 !important;
+}
+
+/* Button Custom Ungu */
+.btn-primary-custom {
+    background-color: #5630a8;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 30px;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background-color: #622ad1;
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* --- Perbaikan Gaya Keranjang & Jarak --- */
+.btn-cart {
+    background: rgba(255, 255, 255, 0.08); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    /* Memberikan jarak tambahan khusus di sebelah kiri keranjang */
+    margin-left: 10px; 
+}
+
+.btn-cart svg {
+    display: block;
+    color: white;
+}
+
+.btn-cart:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    border-color: #a3b8ff;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #8a2be2;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #0b0b0f;
+}
+
+/* Responsif */
+@media (max-width: 480px) {
+    .nav-auth {
+        gap: 12px;
+    }
+    .btn-cart {
+        margin-left: 5px;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 80px 0 120px 0;
+    position: relative;
+}
+
+/* Efek Cahaya Ungu di Belakang */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: rgb(86, 32, 140);
+    filter: blur(120px);
+    top: 10%;
+    right: 15%;
+    z-index: -1;
+}
+
+.badge-it {
+    background-color: rgba(123, 66, 245, 0.1);
+    color: #6336c3;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-desc {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    max-width: 520px;
+    line-height: 1.6;
+}
+
+/* Image Styling */
+.hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.main-img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Kartu Statistik Melayang */
+.floating-card {
+    position: absolute;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    color: #333;
+    width: 200px;
+    top: 15%;
+    left: -20px;
+    z-index: 2;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    animation: floatAnim 4s ease-in-out infinite;
+}
+
+/* Animasi Melayang */
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Responsif Mobile */
+@media (max-width: 991px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    .text-section {
+        text-align: center;
+    }
+    .hero-desc {
+        margin: 0 auto;
+    }
+    .floating-card {
+        display: none; /* Sembunyikan di HP agar tidak berantakan */
+    }
+    .hero-section::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.about-section {
+    padding: 100px 20px;
+    background: transparent;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.about-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap; /* Agar responsif di mobile */
+}
+
+/* Bagian Teks */
+.about-content {
+    flex: 1 1 500px;
+}
+
+.sub-title {
+    color: #3b82f6;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.main-title {
+    font-size: 2.8rem;
+    margin: 15px 0 25px;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #3b82f6;
+}
+
+.description {
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-item .icon {
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* Bagian Statistik (Glassmorphism) */
+.about-stats {
+    flex: 1 1 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-box h3 {
+    font-size: 2.5rem;
+    color: #3b82f6;
+    margin-bottom: 5px;
+}
+
+.stat-box p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.highlight-box {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Animasi Scroll */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: 1s ease-out;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: 1s ease-out;
+}
+
+.reveal-left.active, .reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Container Background */
+.courses-section {
+    background-color: #0d0b1a; /* Samakan dengan hero */
+    color: white;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    color: #a0a0a0;
+    max-width: 600px;
+    font-size: 0.95rem;
+}
+
+/* Card Styling */
+.course-card {
+    background-color: #161426; /* Warna kartu sedikit lebih terang dari bg */
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(123, 66, 245, 0.2);
+}
+
+.course-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.course-body {
+    padding: 20px;
+}
+
+.course-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    height: 50px; /* Menjaga tinggi title agar seragam */
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.course-price {
+    color: #7b42f5;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+/* Rating Bintang */
+.rating {
+    color: #ffc107; /* Warna kuning emas */
+    font-size: 0.85rem;
+}
+
+.cart-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 9999; /* biar tidak ketutup */
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 50%;
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: #222;
+  color: white;
+  padding: 15px;
+  transition: 0.3s;
+  z-index: 9999; /* penting */
+}
+
+.cart-panel.active {
+  right: 0;
+}
+
+/* Button Enroll */
+.btn-enroll {
+    background-color: #7b42f5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-enroll:hover {
+    background-color: #622ad1;
+    color: white;
+}
+
+/* Responsif Grid */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Styling Latar Belakang */
+body {
+    background-color: #0b0d17; /* Warna gelap sesuai gambar */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.brand-section {
+    padding: 80px 0;
+    background: radial-gradient(circle at top, #1c1033 0%, #0b0d17 70%);
+}
+
+/* Tipografi */
+h2 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+
+.text-secondary {
+    color: #a0a0a0 !important;
+}
+
+/* Grid Logo */
+.logo-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    transition: background 0.3s ease;
+}
+
+.logo-item img {
+    max-width: 140px;
+    height: auto;
+    filter: brightness(0) invert(1); /* Membuat logo putih */
+    opacity: 0.7;
+}
+
+.logo-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Custom Border untuk Layout */
+.border-end, .border-bottom {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Responsif Mobile (Border Adjustment) */
+@media (max-width: 767px) {
+    /* Menghapus border-end pada setiap item ke-2 di mobile */
+    .logo-item:nth-child(2n) {
+        border-right: none !important;
+    }
+    /* Menambahkan border-bottom untuk baris penutup di mobile */
+    .logo-item:nth-child(7), .logo-item:nth-child(8) {
+        border-bottom: none !important;
+    }
+}
+
+/* Container Utama */
+.review-section {
+    padding: 100px 20px;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+/* Grid System */
+.reviews-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Card Transparan (Glassmorphism) */
+.review-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 35px;
+    flex: 1 1 320px;
+    max-width: 380px;
+    text-align: left;
+    transition: all 0.4s ease;
+}
+
+/* Link Logo/Kategori */
+.logo-link {
+    color: #4facfe;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Rating Bintang (Bukan Emot) */
+.star-rating {
+    margin-bottom: 20px;
+}
+
+.star-icon {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.star-icon.fill {
+    color: #ffcc00; /* Warna Kuning Emas */
+}
+
+.comment {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 25px;
+}
+
+.user-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+/* --- LOGIKA ANIMASI SCROLL --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover Effect Interaktif */
+.review-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px);
+    border-color: #4facfe;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+:root {
+    --bg-color: #0b0d17;
+    --card-bg: #1a1c2e;
+    --primary-purple: #7c4dff;
+    --text-main: #ffffff;
+    --text-muted: #a0a0b0;
+    --accent-gradient: linear-gradient(90deg, #1e1e30 0%, #302050 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+.faq-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Help Banner Section */
+.help-banner {
+    background: var(--accent-gradient);
+    border-radius: 16px;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.help-banner__content {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.help-banner__avatars {
+    display: flex;
+}
+
+.help-banner__avatars img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #251b45;
+    margin-right: -12px;
+}
+
+.help-banner__text h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.help-banner__text p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 400px;
+}
+
+.help-banner__btn {
+    background-color: var(--primary-purple);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.help-banner__btn:hover {
+    opacity: 0.9;
+}
+
+/* FAQ Header Section */
+.faq-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.faq-header__subtitle {
+    color: var(--primary-purple);
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.faq-header__title {
+    font-size: 2.5rem;
+    margin: 10px 0 20px;
+}
+
+.faq-header__desc {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ Grid Section */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.faq-item {
+    display: flex;
+    gap: 15px;
+}
+
+.faq-item__icon {
+    background-color: #251b45;
+    color: var(--primary-purple);
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.faq-item__body h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.faq-item__body p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Responsiveness */
+@media (max-width: 850px) {
+    .help-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .help-banner__content {
+        flex-direction: column;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-header__title {
+        font-size: 2rem;
+    }
+}
+
+:root {
+    --bg-dark: #0b0d17;
+    --card-accent: rgba(25, 28, 45, 0.7);
+    --primary-purple: #7c4dff;
+    --text-white: #ffffff;
+    --text-dim: #a0a0b0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-white);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-skillio {
+    position: relative;
+    padding: 60px 0 20px;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+}
+
+/* Efek Gradasi Background Tengah Atas */
+.bg-glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(124, 77, 255, 0.12) 0%, rgba(11, 13, 23, 0) 70%);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+/* Grid: Rata Kanan Kiri (Justify Content) */
+.footer-main-grid {
+    display: flex;
+    justify-content: space-between; /* Membuat kolom menempel ke tepi kanan & kiri */
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.col {
+    flex: 0 1 200px;
+    min-width: 200px;
+}
+
+/* Teks Rata Kanan Kiri (Text Justify) */
+.justify-text {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.col-brand .brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    color: var(--primary-purple);
+    filter: drop-shadow(0 0 8px rgba(124, 77, 255, 0.4));
+}
+
+.brand-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.info-content p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.col-links ul {
+    list-style: none;
+}
+
+.col-links ul li {
+    margin-bottom: 12px;
+}
+
+.col-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+}
+
+.col-links a:hover {
+    color: var(--primary-purple);
+}
+
+/* Newsletter Box */
+.col-newsletter p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+}
+
+.subscribe-box {
+    display: flex;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.subscribe-box input {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    color: white;
+    outline: none;
+    width: 100%;
+}
+
+.subscribe-box button {
+    background: var(--primary-purple);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Banner App CTA */
+.cta-banner {
+    background: var(--card-accent);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px 40px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between; /* Menempelkan teks ke kiri dan tombol ke kanan */
+    align-items: center;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.cta-text h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    max-width: 650px;
+    line-height: 1.6;
+}
+
+.cta-store {
+    display: flex;
+    gap: 15px;
+}
+
+.cta-store img {
+    height: 40px;
+}
+
+/* Footer Bottom Justified */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between; /* Ikon di kiri, teks di kanan */
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.social-group {
+    display: flex;
+    gap: 20px;
+}
+
+.social-group a {
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-group a:hover {
+    color: var(--primary-purple);
+    transform: scale(1.1);
+}
+
+.copy {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+/* Responsif */
+@media (max-width: 900px) {
+    .footer-main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .cta-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-main-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-bottom {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+}
+</style>
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold fs-4" href="#">Skillio</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#business">Business</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#review">Review</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="nav-link me-3">Sign In</a>
+                    <button class="btn btn-primary-custom">Sign Up</button>
+
+                    <button class="btn-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8" cy="21" r="1"></circle>
+                    <circle cx="19" cy="21" r="1"></circle>
+                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                </svg>
+                <span class="badge">0</span>
+                
+            </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-section">
+                    <span class="badge-it">Start Learning Your IT Journey</span>
+                    <h1 class="hero-title">Achieve your dreams by realizing the things you want.</h1>
+                    <p class="hero-desc">
+                        Tingkatkan keahlian digital Anda dengan kurikulum berbasis industri. Belajar kapan saja, di mana saja dengan bimbingan ahli.
+                    </p>
+                    <button class="btn btn-primary-custom px-5 py-3 fs-5 mt-3">Discover Here</button>
+                </div>
+
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="hero-image-container">
+                        <div class="floating-card">
+                            <p class="m-0 fw-bold small mb-2">Skill Progress</p>
+                            <div class="progress mb-2" style="height: 6px;">
+                                <div class="progress-bar" style="width: 75%; background-color: #7b42f5;"></div>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-info" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                        
+                        <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Student" class="main-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+    <div class="container">
+        <div class="about-wrapper">
+            <div class="about-content reveal-left">
+                <span class="sub-title">Tentang Kami</span>
+                <h2 class="main-title">Menghadirkan Teknologi<span class="highlight"> Canggih</span> untuk <span class="highlight">Kehidupan Modern</span></h2>
+                <p class="description">
+                    Skillio hadir untuk memenuhi kebutuhan elektronik Anda dengan koleksi produk terbaru dan terbaik. Kami berkomitmen menjadi jembatan antara inovasi teknologi dan kebutuhan sehari-hari, memastikan Anda selalu mendapatkan perangkat yang mendukung produktivitas dan gaya hidup.
+                </p>
+                <p class="description">
+                    Solusi lengkap tempat Anda bisa memilih, berkonsultasi, dan mendapatkan perangkat elektronik yang tepat sesuai keinginan.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <span class="icon">✔</span>
+                        <p>Kualitas Terjamin</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="icon">✔</span>
+                        <p>Pelayanan Ramah & Cepat</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-stats reveal-right">
+                <div class="stat-box">
+                    <h3>10K+</h3>
+                    <p>Pelanggan Setia</p>
+                </div>
+                <div class="stat-box">
+                    <h3>50+</h3>
+                    <p>Brand Terkemuka</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100+</h3>
+                    <p>Varian Produk</p>
+                </div>
+                <div class="stat-box highlight-box">
+                    <h3>95%</h3>
+                    <p>Rating Positif</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const aboutObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-left, .reveal-right').forEach((el) => {
+        aboutObserver.observe(el);
+    });
+</script>
+
+    <section class="courses-section py-5" id="business">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Superior Products</h2>
+                <p class="section-subtitle mx-auto">
+                    "Discover the latest and greatest technological devices ready to support your activities and lifestyle."
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Apple MacBook Pro</h5>
+                            <p class="course-price">$55.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Check It Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="jam.jpg" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Apple watch Ultra</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Check It Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="ipad.webp" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Ipad</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Check It Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="iphone.jpg" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Iphone 17 Pro</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Check It Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="mouse.jpg" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Lenovo Professional Bluetooyh Rechargeable</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="keyboard.jpg" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Steelseries Apex 3 (TKL)</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="music.jpg" alt="Course" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">Havit H630BT PRO</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="course-card">
+                        <img src="tws.jpg" class="course-img">
+                        <div class="course-body">
+                            <h5 class="course-name">J11 TWS/J11 Sleepbuds</h5>
+                            <p class="course-price">$45.00</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn btn-enroll w-100 mt-3">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-section" id="review">
+    <div class="container">
+        <h2 class="section-title">Review Customer</h2>
+        <div class="reviews-grid">
+            <div class="review-card reveal">
+                <a href="#" class="logo-link">Skillio Course</a>
+                <div class="star-rating">
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                </div>
+                <p class="comment">"Barang sampai dengan aman dan kondisi sangat mulus. Kualitas produknya benar-benar terjamin dan sesuai deskripsi. Sangat puas berbelanja di sini!"</p>
+                <h4 class="user-name">Fajar Ramadhan</h4>
+            </div>
+
+            <div class="review-card reveal">
+                <a href="#" class="logo-link">Skillio Course</a>
+                <div class="star-rating">
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                </div>
+                <p class="comment">"Pelayanan ramah dan respon cepat. Pengiriman juga sangat cepat sampai. Produk elektroniknya original dan berfungsi dengan sangat baik. Recommended!"</p>
+                <h4 class="user-name">Siti Aisyah</h4>
+            </div>
+
+            <div class="review-card reveal">
+                <a href="#" class="logo-link">Skillio Course</a>
+                <div class="star-rating">
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill">&#9733;</span>
+                    <span class="star-icon fill"></span>
+                </div>
+                <p class="comment">"Harga bersaing dan kualitas barang sangat bagus. Proses transaksi mudah dan aman. Pasti akan belanja lagi di Skillio Store!"</p>
+                <h4 class="user-name">Budi Santoso</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Memberikan delay kecil tiap kartu agar muncul bergantian (staggered)
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, index * 200); 
+            }
+        });
+    }, {
+        threshold: 0.1 // Berjalan ketika 10% elemen terlihat
+    });
+
+    const hiddenElements = document.querySelectorAll('.reveal');
+    hiddenElements.forEach((el) => observer.observe(el));
+</script>
+
+<section class="faq-container">
+        <div class="help-banner">
+            <div class="help-banner__content">
+                <div class="help-banner__avatars">
+                    <img src="https://i.pravatar.cc/150?u=1" alt="Support 1">
+                    <img src="https://i.pravatar.cc/150?u=2" alt="Support 2">
+                    <img src="https://i.pravatar.cc/150?u=3" alt="Support 3">
+                    <img src="https://i.pravatar.cc/150?u=4" alt="Support 4">
+                </div>
+                <div class="help-banner__text">
+                    <h2>Need help?</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+            <button class="help-banner__btn">Contact Us</button>
+        </div>
+        </section>
+
+        <footer class="footer-skillio">
+        <div class="bg-glow"></div>
+
+        <div class="container">
+            <div class="footer-main-grid">
+                
+                <div class="col col-brand">
+                    <div class="brand-wrapper">
+                        <i class="fas fa-circle-notch logo-icon"></i>
+                        <span class="brand-name">Skillio</span>
+                    </div>
+                    <div class="info-content">
+                        <p><i class="fas fa-map-marker-alt"></i> JL Company Design No 20 Jakarta - Indonesia</p>
+                        <p><i class="fas fa-envelope"></i> skillio@business.io</p>
+                        <p><i class="fas fa-phone-alt"></i> +62 857-0260-4970</p>
+                    </div>
+                </div>
+
+                <div class="col col-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">E-Learning</a></li>
+                        <li><a href="#">Bootcamp</a></li>
+                        <li><a href="#">Mentor</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Mentoring</a></li>
+                        <li><a href="#">Corporate Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="col col-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Leadership</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Article & News</a></li>
+                        <li><a href="#">Legal Notices</a></li>
+                    </ul>
+                </div>
+
+                <div class="col col-newsletter">
+                    <h3>Newsletter</h3>
+                    <p class="justify-text">Sign up for our newsletter to get latest information, news and free insights. Stay updated with our progress.</p>
+                    <form class="subscribe-box">
+                        <input type="email" placeholder="Email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="cta-banner">
+                <div class="cta-text">
+                    <h2 class="justify-text">Ready to learn on-the-go? Download our mobile app ecourse and start learning anytime, anywhere with high quality materials!</h2>
+                </div>
+                <div class="cta-store">
+                    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store"></a>
+                    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store"></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-group">
+                    <a href="https://www.instagram.com/chls3aaaaa"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/@"chelseayaw-y5h><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.tiktok.com/scnhll"><i class="bi bi-tiktok"></i></a>
+                </div>
+                <p class="copy">Copyright 2024 Skillio. All rights reserved. Powered by Skillio Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
